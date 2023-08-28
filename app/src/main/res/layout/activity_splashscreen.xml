@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="By:Diego Sandoval"
+        android:text="@string/Creator"
         android:textColor="@color/semiWhite"
 
         android:textSize="20sp"
