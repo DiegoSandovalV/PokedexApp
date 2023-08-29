@@ -1,41 +1,42 @@
 package com.example.kotlin.pokedexapp.framework.views.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kotlin.pokedexapp.data.PokemonRepository
-import com.example.kotlin.pokedexapp.data.network.model.PokedexObject
-import com.example.kotlin.pokedexapp.data.network.model.PokemonBase
+import androidx.fragment.app.Fragment
+import com.example.kotlin.pokedexapp.R
 import com.example.kotlin.pokedexapp.utils.Constants
-import com.example.kotlin.pokedexapp.framework.adapters.PokemonAdapter
 import com.example.kotlin.pokedexapp.databinding.ActivityMainBinding
 import com.example.kotlin.pokedexapp.framework.viewmodel.MainViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.kotlin.pokedexapp.framework.views.fragments.PokedexFragment
+import com.example.kotlin.pokedexapp.framework.views.fragments.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 
+    //Global variables
     private lateinit var binding: ActivityMainBinding
-    private val adapter: PokemonAdapter = PokemonAdapter()
-    private lateinit var data: ArrayList<PokemonBase>
     private val viewModel: MainViewModel by viewModels()
+    private lateinit var currentFragment: Fragment
+    private var currentMenuOption: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initializeBinding()
         initializeObservers()
-        viewModel.getPokemonList()
+        initializeListeners()
+        exchangeCurrentFragment(PokedexFragment(), Constants.MENU_POKEDEX)
+
     }
 
-    private fun initializeObservers() {
-        viewModel.pokedexObjectLiveData.observe(this) { pokedexObject ->
-            if (pokedexObject != null) {
-                setUpRecyclerView(pokedexObject.results)
-            }
+    private fun initializeListeners(){
+        binding.appBarMain.llPokedex.setOnClickListener {
+            selectMenuOption(Constants.MENU_POKEDEX)
+        }
+
+        binding.appBarMain.llSearch.setOnClickListener {
+            selectMenuOption(Constants.MENU_SEARCH)
         }
     }
 
@@ -44,37 +45,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    private fun testData(): ArrayList<PokemonBase> {
-        val result = ArrayList<PokemonBase>()
+    private fun initializeObservers() {
 
-        result.add(PokemonBase("bulbasaur", ""))
-        result.add(PokemonBase("charmander", ""))
-        result.add(PokemonBase("squirtle", ""))
-
-        return result
     }
 
-    private fun setUpRecyclerView(dataForList: ArrayList<PokemonBase>) {
-        binding.RVPokemon.setHasFixedSize(true)
-        val linearLayoutManager = LinearLayoutManager(
-            this,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        binding.RVPokemon.layoutManager = linearLayoutManager
-        adapter.PokemonAdapter(dataForList, this)
-        binding.RVPokemon.adapter = adapter
+    private fun exchangeCurrentFragment(newFragment: Fragment, newMenuOption:String){
+        currentFragment = newFragment
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment_content_main,currentFragment)
+            .commit()
+
+        currentMenuOption = newMenuOption
     }
 
-    private fun getPokemonList() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val pokemonRepository = PokemonRepository()
-            val result: PokedexObject? =
-                pokemonRepository.getPokemonList(Constants.MAX_POKEMON_NUMBER)
-            Log.d("Salida", result?.count.toString())
-            CoroutineScope(Dispatchers.Main).launch {
-                setUpRecyclerView(result?.results!!)
-            }
+    private fun selectMenuOption(menuOption:String){
+        if(menuOption == currentMenuOption){
+            return
+        }
+
+        when(menuOption){
+            Constants.MENU_POKEDEX -> exchangeCurrentFragment(PokedexFragment(),Constants.MENU_POKEDEX)
+            Constants.MENU_SEARCH -> exchangeCurrentFragment(SearchFragment(),Constants.MENU_SEARCH)
         }
     }
 

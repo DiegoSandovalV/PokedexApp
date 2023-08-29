@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PokedexViewModel: ViewModel() {
+class PokedexViewModel:ViewModel() {
 
     val pokedexObjectLiveData = MutableLiveData<PokedexObject>()
     private val pokemonListRequirement = PokemonListRequirement()

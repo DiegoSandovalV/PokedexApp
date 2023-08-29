@@ -20,7 +20,7 @@
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo"
+            android:src="@drawable/baseline_grid_on_24"
             android:contentDescription="PokedexImg" />
 
         <TextView
@@ -53,7 +53,7 @@
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo"
+            android:src="@drawable/baseline_search_24"
             android:contentDescription="SearchImg" />
 
         <TextView

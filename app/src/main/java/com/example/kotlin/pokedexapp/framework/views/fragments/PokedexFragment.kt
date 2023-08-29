@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin.pokedexapp.R
@@ -63,12 +64,15 @@ class PokedexFragment : Fragment() {
 
     private fun setUpRecyclerView(dataForList: ArrayList<PokemonBase>) {
         recyclerView.setHasFixedSize(true)
-        val linearLayoutManager = LinearLayoutManager(
+        /*val linearLayoutManager = LinearLayoutManager(
+            requireContext(),        LinearLayoutManager.VERTICAL,        false)*/
+        val gridLayoutManager = GridLayoutManager(
             requireContext(),
-            LinearLayoutManager.VERTICAL,
+            3,
+            GridLayoutManager.VERTICAL,
             false
         )
-        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.layoutManager = gridLayoutManager
         adapter.PokemonAdapter(dataForList, requireContext())
         recyclerView.adapter = adapter
     }
