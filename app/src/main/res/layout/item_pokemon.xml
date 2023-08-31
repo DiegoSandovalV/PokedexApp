@@ -1,46 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llPokemon"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="vertical"
-    android:padding="4dp"
-    android:id="@+id/llPokemon" >
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvPokemon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="8dp"
+        card_view:cardUseCompatPadding="true"
         card_view:layout_constraintBottom_toBottomOf="parent"
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintTop_toTopOf="parent">
 
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/pokeball" />
+
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_width="182dp"
+            android:layout_height="120dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/TVName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="left"
+                    android:text="Nombre"
+                    android:textAllCaps="true"
+                    android:textColor="?android:textColor"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CVType1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="8dp"
+                    card_view:cardElevation="8dp"
+                    card_view:contentPaddingBottom="2dp"
+                    card_view:contentPaddingLeft="4dp"
+                    card_view:contentPaddingRight="4dp"
+                    card_view:contentPaddingTop="2dp">
+
+                    <TextView
+                        android:id="@+id/TVType1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:elevation="16dp"
+                        android:gravity="left"
+                        android:text="Tipo"
+                        android:textAllCaps="true"
+                        android:textColor="?android:textColor"
+                        android:textSize="10sp" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CVType2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="8dp"
+                    card_view:cardElevation="8dp"
+                    card_view:contentPaddingBottom="2dp"
+                    card_view:contentPaddingLeft="4dp"
+                    card_view:contentPaddingRight="4dp"
+                    card_view:contentPaddingTop="2dp">
+
+                    <TextView
+                        android:id="@+id/TVType2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:elevation="16dp"
+                        android:gravity="left"
+                        android:text="Tipo"
+                        android:textAllCaps="true"
+                        android:textColor="?android:textColor"
+                        android:textSize="10sp" />
+                </androidx.cardview.widget.CardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <ImageView
                 android:id="@+id/IVPhoto"
-                android:layout_width="88dp"
-                android:layout_height="88dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/ic_launcher" />
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintBottom_toBottomOf="@+id/cvPokemon"
+                app:layout_constraintEnd_toEndOf="@+id/cvPokemon"
+                app:layout_constraintStart_toEndOf="@+id/llTypeText"
+                app:layout_constraintTop_toTopOf="@+id/cvPokemon" />
 
-            <TextView
-                android:id="@+id/TVName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:gravity="center"
-                android:text="Nombre"
-                android:textAllCaps="true"
-                android:textColor="?android:textColor"
-                android:textSize="8sp" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

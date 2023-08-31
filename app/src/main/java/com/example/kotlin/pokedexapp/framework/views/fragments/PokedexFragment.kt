@@ -68,7 +68,7 @@ class PokedexFragment : Fragment() {
             requireContext(),        LinearLayoutManager.VERTICAL,        false)*/
         val gridLayoutManager = GridLayoutManager(
             requireContext(),
-            3,
+            2,
             GridLayoutManager.VERTICAL,
             false
         )
