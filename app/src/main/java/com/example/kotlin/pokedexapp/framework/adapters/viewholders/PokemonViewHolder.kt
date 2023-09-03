@@ -36,10 +36,10 @@ class PokemonViewHolder(private val binding: ItemPokemonBinding) :
     }
 
     private fun passViewGoToPokemonDetail(url: String, context: Context) {
-        var intent: Intent = Intent(context, PokemonDetailActivity::class.java)
+        val intent: Intent = Intent(context, PokemonDetailActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        context.startActivity(intent)
         intent.putExtra(Constants.URL_POKEMON, url)
+        context.startActivity(intent)
     }
 
     private fun getPokemonInfo(url: String, imageView: ImageView, context: Context) {
