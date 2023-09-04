@@ -3,6 +3,9 @@ package com.example.kotlin.pokedexapp.framework.views.activities
 import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
 import android.os.Bundle
 import android.util.Log
 import com.bumptech.glide.Glide
@@ -64,8 +67,13 @@ class PokemonDetailActivity : Activity() {
 
 
         binding.TVName.text = pokemon.name
-        binding.TVWeightValue.text = pokemon.weight.toString() + " kg"
-        binding.TVHeightValue.text = pokemon.height.toString() + " m"
+
+
+        val weight = pokemon.weight / 10.0
+        val height = pokemon.height / 10.0
+
+        binding.TVWeightValue.text = weight.toString() + " kg"
+        binding.TVHeightValue.text = height.toString() + " m"
 
         binding.TVType1.background = generateShapeWBorder(pokemon.types[0].type.name)
 
@@ -78,6 +86,12 @@ class PokemonDetailActivity : Activity() {
         } else {
             binding.TVType2.text = ""
         }
+
+        binding.TVHPValue.text = pokemon.stats[0].base_stat.toString()
+        binding.TVAttackValue.text = pokemon.stats[1].base_stat.toString()
+        binding.TVDefenseValue.text = pokemon.stats[2].base_stat.toString()
+        binding.TVSpeedValue.text = pokemon.stats[5].base_stat.toString()
+        binding.TVXPValue.text = pokemon.base_experience.toString()
 
 
 
@@ -158,6 +172,5 @@ class PokemonDetailActivity : Activity() {
         val newColor = Color.rgb(newRed, newGreen, newBlue)
         return String.format("#%06X", 0xFFFFFF and newColor)
     }
-
 
 }
