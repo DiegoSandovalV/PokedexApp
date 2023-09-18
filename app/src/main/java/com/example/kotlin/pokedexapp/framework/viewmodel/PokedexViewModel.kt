@@ -19,7 +19,7 @@ class PokedexViewModel:ViewModel() {
     fun getPokemonList(){
         viewModelScope.launch(Dispatchers.IO) {
             val result: PokedexObject? = pokemonListRequirement(Constants.MAX_POKEMON_NUMBER)
-            Log.d("Salida", result?.count.toString())
+            Log.d("SalidaCOunt", result?.count.toString())
             CoroutineScope(Dispatchers.Main).launch {
                 pokedexObjectLiveData.postValue(result!!)
             }
